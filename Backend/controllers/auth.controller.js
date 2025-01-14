@@ -40,3 +40,8 @@ export const login = async (req, res) => {
         return res.status(500).json({ success: false, error: error.message });
     }
 };
+
+
+export const verify = (req, res) => {
+    return res.status(200).json({success: true,user: req.user});
+};
