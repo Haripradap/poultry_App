@@ -6,6 +6,9 @@ import PrivateRoutes from './utils/PrivateRoutes';
 import RoleBaedRoute from './utils/RoleBaedRoute';
 import AdminSummary from './components/dashboard/AdminSummary';
 import BatchList from './components/Batches/BatchList';
+import AddBatches from './components/Batches/AddBatches';
+import EmployeeList from './components/employee/EmployeeList';
+import AddEmployee from './components/employee/AddEmployee';
 function App() {
   
   return (
@@ -23,6 +26,12 @@ function App() {
           } >
             <Route index element={<AdminSummary />} ></Route>
             <Route path='/admin-dashboard/batches' element={<BatchList />} ></Route>
+            <Route path='/admin-dashboard/add-new-batch' element={<AddBatches />} ></Route>
+
+
+
+            <Route path='/admin-dashboard/employees' element={<EmployeeList />} ></Route>
+            <Route path='/admin-dashboard/add-employee' element={<AddEmployee />} ></Route>
           </Route>
           <Route path='/employee-dashboard' element={< EmployeeDashboard/>} />
         </Routes>
