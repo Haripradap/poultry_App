@@ -6,26 +6,22 @@ export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Check if the user exists
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ success: false, error: "User not found" });
         }
 
-        // Compare the password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(401).json({ success: false, error: "Wrong password" });
+            return res.status(401).json({ success: false, error: "Incorrect password" });
         }
 
-        // Generate JWT token
         const token = jwt.sign(
             { _id: user._id, role: user.role },
             process.env.JWT_KEY,
             { expiresIn: "10d" }
         );
 
-        // Successful login response
         return res.status(200).json({
             success: true,
             token,
@@ -35,13 +31,11 @@ export const login = async (req, res) => {
                 role: user.role,
             },
         });
-
     } catch (error) {
         return res.status(500).json({ success: false, error: error.message });
     }
 };
 
-
 export const verify = (req, res) => {
-    return res.status(200).json({success: true,user: req.user});
+    return res.status(200).json({ success: true, user: req.user });
 };
